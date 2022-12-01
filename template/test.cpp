@@ -3,9 +3,12 @@
 
 #include <gtest/gtest.h>
 
-#include "lib.hpp"
+#include "lib.h"
 
-TEST(template, basic_assertion) {
-    EXPECT_STRNE("hello", "world");
-    EXPECT_EQ(7 * 6, 42);
+TEST(day, part1) {
+    EXPECT_EQ(part1("..//test_input"), 0);
+}
+
+TEST(day, part2) {
+    EXPECT_EQ(part2("..//test_input"), 0);
 }

@@ -1,13 +1,13 @@
 #include <chrono>
 #include <iostream>
 
-#include "lib.hpp"
+#include "lib.h"
 
 
-int part1() {
+int part1(const char* path) {
     return 0;
 }
 
-int part2() {
+int part2(const char* path) {
     return 0;
 }
