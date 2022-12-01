@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.20)
 project(aoc2022)
 
 set(CMAKE_CXX_STANDARD 17)
+add_compile_options(
+    -Wall
+    -Werror
+    -Wextra
+    -Wpedantic
+)
 
 include(FetchContent)
 FetchContent_Declare(

@@ -1,4 +1,3 @@
-#include <chrono>
 #include <iostream>
 #include <filesystem>
 #include <fstream>
@@ -17,9 +16,8 @@ long part1(const char* path) {
     }
     long total = 0;
     long max = -1;
-    auto emptyline = std::string("");
     while(std::getline(infile, line)) {
-        if(line == emptyline) {
+        if(line.empty()) {
             max = total > max ? total : max;
             total = 0;
             continue;
@@ -41,13 +39,12 @@ long part2(const char* path) {
     long max0 = -1;
     long max1 = -1;
     long max2 = -1;
-    long *minmax = &max0;
-    auto emptyline = std::string("");
+    long *minmax = &max0;  // Pointer to the smallest max.
     while(std::getline(infile, line)) {
-        if(line == emptyline) {
-            *minmax = total > *minmax ? total : *minmax;
+        if(line.empty()) {
+            *minmax = total > *minmax ? total : *minmax;  // If total > smallest max, overwrite it.
             minmax = max0 < max1 ? &max0 : &max1;
-            minmax = *minmax < max2 ? minmax : &max2;
+            minmax = *minmax < max2 ? minmax : &max2;  // minmax now points to the new smallest max.
             total = 0;
             continue;
         }

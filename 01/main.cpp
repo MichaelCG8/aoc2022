@@ -1,21 +1,18 @@
-#include <chrono>
 #include <iostream>
+
+#include "../aoc.h"
 
 #include "lib.h"
 
 
 int main() {
-    auto start = std::chrono::high_resolution_clock::now();
     auto result1 = part1("01/input");
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Part 1: " << result1 << ", time [us]: " << duration.count() << std::endl;
+    std::cout << "Part 1: " << result1 << std::endl;
+    time_execution(&part1, "01/input", 1000);
     
-    start = std::chrono::high_resolution_clock::now();
     auto result2 = part2("01/input");
-    end = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Part 2: " << result2 << ", time [us]: " << duration.count() << std::endl;
+    std::cout << "Part 2: " << result2 << std::endl;
+    time_execution(&part2, "01/input", 1000);
     
     return 0;
 }
