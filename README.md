@@ -9,3 +9,7 @@
 
     # Run puzzles
     build/day00
+
+    # New day
+    cookiecutter template
+    # Enter number when prompted, e.g. 4
