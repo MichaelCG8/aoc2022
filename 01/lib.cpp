@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <iostream>
 #include <filesystem>
 #include <fstream>
@@ -7,15 +8,15 @@
 #include "lib.h"
 
 
-long part1(const char* path) {
+int32_t part1(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
         auto p = std::filesystem::path(path);
         std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
     }
-    long total = 0;
-    long max = -1;
+    int32_t total = 0;
+    int32_t max = -1;
     while(std::getline(infile, line)) {
         if(line.empty()) {
             max = total > max ? total : max;
@@ -28,18 +29,18 @@ long part1(const char* path) {
     return max;
 }
 
-long part2(const char* path) {
+int32_t part2(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
         auto p = std::filesystem::path(path);
         std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
     }
-    long total = 0;
-    long max0 = -1;
-    long max1 = -1;
-    long max2 = -1;
-    long *minmax = &max0;  // Pointer to the smallest max.
+    int32_t total = 0;
+    int32_t max0 = -1;
+    int32_t max1 = -1;
+    int32_t max2 = -1;
+    int32_t *minmax = &max0;  // Pointer to the smallest max.
     while(std::getline(infile, line)) {
         if(line.empty()) {
             *minmax = total > *minmax ? total : *minmax;  // If total > smallest max, overwrite it.

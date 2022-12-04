@@ -5,14 +5,18 @@
 #include "lib.h"
 
 
-long part1(const char* path) {
+#define WIN_POINTS (6)
+#define DRAW_POINTS (3)
+#define LOSS_POINTS (0)
+
+int32_t part1(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
         auto p = std::filesystem::path(path);
         std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
     }
-    long total = 0;
+    int32_t total = 0;
     while(std::getline(infile, line)) {
         const char *data = line.data();
 
@@ -23,19 +27,19 @@ long part1(const char* path) {
 
         bool win = (me - them + 3) % 3 == 1;
 
-        total += me + (win ? 6 : (draw ? 3 : 0));
+        total += me + (win ? WIN_POINTS : (draw ? DRAW_POINTS : LOSS_POINTS));
     }
     return total;
 }
 
-long part2(const char* path) {
+int32_t part2(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
         auto p = std::filesystem::path(path);
         std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
     }
-    long total = 0;
+    int32_t total = 0;
     while(std::getline(infile, line)) {
         const char *data = line.data();
 
@@ -48,7 +52,7 @@ long part2(const char* path) {
         if(me == 0) {
             me = 3;
         }
-        total += me + (win ? 6 : (draw ? 3 : 0));
+        total += me + (win ? WIN_POINTS : (draw ? DRAW_POINTS : LOSS_POINTS));
     }
     return total;
 }
