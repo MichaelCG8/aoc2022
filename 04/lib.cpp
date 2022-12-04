@@ -63,7 +63,7 @@ int part2(const char* path) {
             }
         }
         // If either the low or high endpoints match, one must include the other.
-        // Otherwise, check if one completely encloses the other.
+        // Otherwise, check if one partially encloses the other.
         if(
             range[0] == range[2]
             || range[1] == range[3]
