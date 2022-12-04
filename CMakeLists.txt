@@ -31,3 +31,13 @@ add_executable(day02 02/main.cpp 02/lib.cpp 02/lib.h)
 add_executable(day02_test 02/test.cpp 02/lib.cpp 02/lib.h)
 target_link_libraries(day02_test GTest::gtest_main)
 gtest_discover_tests(day02_test)
+
+add_executable(day03 03/main.cpp 03/lib.cpp 03/lib.h)
+add_executable(day03_test 03/test.cpp 03/lib.cpp 03/lib.h)
+target_link_libraries(day03_test GTest::gtest_main)
+gtest_discover_tests(day03_test)
+
+add_executable(day04 04/main.cpp 04/lib.cpp 04/lib.h)
+add_executable(day04_test 04/test.cpp 04/lib.cpp 04/lib.h)
+target_link_libraries(day04_test GTest::gtest_main)
+gtest_discover_tests(day04_test)
