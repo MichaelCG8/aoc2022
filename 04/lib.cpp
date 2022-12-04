@@ -23,8 +23,8 @@ int part1(const char* path) {
             if(c == '-' || c == ',') {
                 range_idx += 1;
             } else {
-                char val = line[i] - '0';
-                range[range_idx] = range[range_idx] * 10 + val;
+                char digit = c - '0';
+                range[range_idx] = range[range_idx] * 10 + digit;
             }
         }
         // If either the low or high endpoints match, one must include the other.
@@ -58,8 +58,8 @@ int part2(const char* path) {
             if(c == '-' || c == ',') {
                 range_idx += 1;
             } else {
-                char val = line[i] - '0';
-                range[range_idx] = range[range_idx] * 10 + val;
+                char digit = c - '0';
+                range[range_idx] = range[range_idx] * 10 + digit;
             }
         }
         // If either the low or high endpoints match, one must include the other.
