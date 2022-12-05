@@ -10,8 +10,8 @@ int part1(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
-        auto p = std::filesystem::path(path);
-        std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
+        auto fs_path = std::filesystem::path(path);
+        std::cerr << "Couldn't open file: " << std::filesystem::absolute(fs_path) << std::endl;
     }
     while(std::getline(infile, line)) {
     }
@@ -22,8 +22,8 @@ int part2(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
-        auto p = std::filesystem::path(path);
-        std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
+        auto fs_path = std::filesystem::path(path);
+        std::cerr << "Couldn't open file: " << std::filesystem::absolute(fs_path) << std::endl;
     }
     while(std::getline(infile, line)) {
     }

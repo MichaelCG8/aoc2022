@@ -43,7 +43,7 @@ void read_initial(std::array<std::array<char, N_CRATES>, N_STACKS> &stacks, std:
         }
         // Stack crates from end of array towards start.
         for(size_t i = 0; i < N_STACKS; i++) {
-            char c = line[4 * i + 1];
+            char c = line[4 * i + 1];  // NOLINT(readability-identifier-length)
             if(c == ' ') {
                 continue;
             }
@@ -57,8 +57,8 @@ void read_initial(std::array<std::array<char, N_CRATES>, N_STACKS> &stacks, std:
 std::string part1(const char* path) {
     std::ifstream infile(path);
     if(!infile.is_open()) {
-        auto p = std::filesystem::path(path);
-        std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
+        auto fs_path = std::filesystem::path(path);
+        std::cerr << "Couldn't open file: " << std::filesystem::absolute(fs_path) << std::endl;
     }
     std::array<std::array<char, N_CRATES>, N_STACKS> stacks = {};
     std::array<size_t, N_STACKS> count = {
@@ -73,15 +73,15 @@ std::string part1(const char* path) {
     std::getline(infile, line);  // Skip blank line.
 
     std::regex regex(R"(^move (\d+) from (\d+) to (\d+)$)");
-    std::smatch m;
+    std::smatch matches;
 #ifdef TESTING
     print_stacks(stacks, count);
 #endif
     while(std::getline(infile, line)) {
-        std::regex_match(line, m, regex);
-        int move = std::stoi(m[1].str());
-        int from = std::stoi(m[2].str()) - 1;
-        int to = std::stoi(m[3].str()) - 1;
+        std::regex_match(line, matches, regex);
+        int move = std::stoi(matches[1].str());
+        int from = std::stoi(matches[2].str()) - 1;
+        int to = std::stoi(matches[3].str()) - 1;  // NOLINT(readability-identifier-length)
         for(int i = 0; i < move; i++) {
             stacks[to][count[to]] = stacks[from][count[from] - 1];
             count[to]++;
@@ -103,8 +103,8 @@ std::string part2(const char* path) {
     std::string line;
     std::ifstream infile(path);
     if(!infile.is_open()) {
-        auto p = std::filesystem::path(path);
-        std::cerr << "Couldn't open file: " << std::filesystem::absolute(p) << std::endl;
+        auto fs_path = std::filesystem::path(path);
+        std::cerr << "Couldn't open file: " << std::filesystem::absolute(fs_path) << std::endl;
     }
     std::array<std::array<char, N_CRATES>, N_STACKS> stacks = {};
     std::array<size_t, N_STACKS> count = {
@@ -118,15 +118,15 @@ std::string part2(const char* path) {
     std::getline(infile, line);  // Skip blank line.
 
     std::regex regex(R"(^move (\d+) from (\d+) to (\d+)$)");
-    std::smatch m;
+    std::smatch matches;
 #ifdef TESTING
     print_stacks(stacks, count);
 #endif
     while(std::getline(infile, line)) {
-        std::regex_match(line, m, regex);
-        int move = std::stoi(m[1].str());
-        int from = std::stoi(m[2].str()) - 1;
-        int to = std::stoi(m[3].str()) - 1;
+        std::regex_match(line, matches, regex);
+        int move = std::stoi(matches[1].str());
+        int from = std::stoi(matches[2].str()) - 1;
+        int to = std::stoi(matches[3].str()) - 1;  // NOLINT(readability-identifier-length)
         for(int i = 0; i < move; i++) {
             stacks[to][count[to]] = stacks[from][count[from] - move + i];
             count[to]++;
