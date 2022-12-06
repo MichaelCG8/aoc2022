@@ -48,3 +48,8 @@ add_executable(day05_test 05/test.cpp 05/lib.cpp 05/lib.h)
 target_compile_definitions(day05_test PRIVATE TESTING)
 target_link_libraries(day05_test GTest::gtest_main)
 gtest_discover_tests(day05_test)
+
+add_executable(day06 06/main.cpp 06/lib.cpp 06/lib.h)
+add_executable(day06_test 06/test.cpp 06/lib.cpp 06/lib.h)
+target_link_libraries(day06_test GTest::gtest_main)
+gtest_discover_tests(day06_test)
