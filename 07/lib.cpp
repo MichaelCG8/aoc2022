@@ -73,13 +73,8 @@ inline void process_file(std::string &line, Node *current_node, std::vector<Node
         current_node->children.end(),
         [&filename](const Node *n) {return n->name == filename;});
     if(loc == current_node->children.end()) {
-        node_list.emplace_back(current_node, 0, filename);
+        node_list.emplace_back(current_node, size, filename);
         current_node->children.push_back(&node_list.back());
-        Node *containing_dir = current_node;
-        do {
-            containing_dir->size += size;
-            containing_dir = containing_dir->parent;
-        } while(containing_dir != nullptr);
     }
 }
 
@@ -110,16 +105,19 @@ uint64_t get_small_totals(const Node *current_node) {
         child_idx++;
         if(child_idx < current_node->parent->children.size()) {
             checked_children = false;
+            current_node->parent->size += current_node->size;
             current_node = current_node->parent->children[child_idx];
             continue;
         }
         
         // Move to parent.
         checked_children = true;
+        current_node->parent->size += current_node->size;
         current_node = current_node->parent;
         child_idx = child_idx_stack.back();
         child_idx_stack.pop_back();
     }
+
     return total_small_dir_size;
 }
 
@@ -154,6 +152,33 @@ uint64_t part1(const char* path) {
 }
 
 
+inline void process_file_and_sum_size(std::string &line, Node *current_node, std::vector<Node> &node_list) {
+    uint64_t size = 0;
+    size_t char_pos = 0;
+    for(auto c : line) {  // NOLINT(readability-identifier-length)
+        char_pos++;
+        if(c == ' ') {
+            break;
+        }
+        size = size * 10 + (c - '0');  // NOLINT(*magic-numbers)
+    }
+    auto filename = line.substr(char_pos);
+    auto loc = std::find_if(
+        current_node->children.begin(),
+        current_node->children.end(),
+        [&filename](const Node *n) {return n->name == filename;});
+    if(loc == current_node->children.end()) {
+        node_list.emplace_back(current_node, size, filename);
+        current_node->children.push_back(&node_list.back());
+        Node *containing_dir = current_node;
+        do {
+            containing_dir->size += size;
+            containing_dir = containing_dir->parent;
+        } while(containing_dir != nullptr);
+    }
+}
+
+
 uint64_t get_smallest_to_delete(const Node *current_node, uint64_t space_to_free) {
     uint64_t smallest_to_delete = TOTAL_SPACE;
     auto child_idx_stack = std::vector<size_t>();
@@ -161,7 +186,7 @@ uint64_t get_smallest_to_delete(const Node *current_node, uint64_t space_to_free
     bool checked_children = false;
     while(true) {
         // Move to first child.
-        if(!checked_children && current_node->size > space_to_free && !current_node->children.empty()) {
+        if(!checked_children && !current_node->children.empty()) {
             current_node = current_node->children[0];  // NOLINT(readability-container-data-pointer)
             child_idx_stack.push_back(child_idx);
             child_idx = 0;
@@ -215,7 +240,7 @@ uint64_t part2(const char* path) {
                 // No action needed. We only have sizes to sum if we cd into them and see files.
                 break;
             default:
-                process_file(line, current_node, node_list);
+                process_file_and_sum_size(line, current_node, node_list);
                 break;
         }
     }
