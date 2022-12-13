@@ -3,3 +3,7 @@ build/*
 *.swp
 Testing/
 .cache/
+
+# By Eric's request, inputs are not checked in.
+input
+test_input

@@ -58,3 +58,8 @@ add_executable(day07 07/main.cpp 07/lib.cpp 07/lib.h)
 add_executable(day07_test 07/test.cpp 07/lib.cpp 07/lib.h)
 target_link_libraries(day07_test GTest::gtest_main)
 gtest_discover_tests(day07_test)
+
+add_executable(day11 11/main.cpp 11/lib.cpp 11/lib.h)
+add_executable(day11_test 11/test.cpp 11/lib.cpp 11/lib.h)
+target_link_libraries(day11_test GTest::gtest_main)
+gtest_discover_tests(day11_test)
